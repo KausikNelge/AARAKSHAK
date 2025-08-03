@@ -15,7 +15,7 @@ console.log('Submitting:',cleanEmail, cleanPassword);
     return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
       <div className="bg-gray-800 p-8 rounded-xl w-full max-w-md shadow-lg">
-        <h2 className="text-2xl font-semibold mb-6 text-center">Login to Aarakshak</h2>
+        <h2 className="text-2xl font-semibold mb-6 text-center">Login to Arakshak</h2>
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -46,7 +46,7 @@ console.log('Submitting:',cleanEmail, cleanPassword);
           </button>
         </form>
         <p className="text-sm mt-4 text-center text-gray-400">
-  Don’t have an account? <Link to="/register" className="text-purple-400 hover:underline">Register</Link>
+  Don’t have an account already? <Link to="/register" className="text-purple-400 hover:underline">Register</Link>
 </p>
       </div>
     </div>
