@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "echo \"Please use 'npm run frontend' or 'npm run backend' or 'npm run dev' to start the application\"",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd Backend && npm start",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "install-all": "npm install && cd frontend && npm install && cd ../Backend && npm install",
     "seed": "node Backend/seedData.js",
     "update-user": "node Backend/updateUserData.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,5 +34,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.18.0",
     "mongoose": "^8.17.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
