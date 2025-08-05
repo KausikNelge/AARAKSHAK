@@ -7,7 +7,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "seed": "node seedData.js",
-    "update-user": "node updateUserData.js"
+    "update-user": "node updateUserData.js",
+    "create-prod-user": "node createProductionUser.js"
   },
   "dependencies": {
     "express": "^4.18.2",

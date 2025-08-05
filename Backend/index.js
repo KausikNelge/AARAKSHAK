@@ -8,9 +8,15 @@ const apiRoutes = require('./routes/api');
 const { log } = require('console');
 const app = express();
 
-// Enhanced CORS configuration
+// Production CORS configuration
 const corsOptions = {
-  origin: true, // Allow all origins temporarily for debugging
+  origin: [
+    'http://localhost:3000',
+    'https://aarakshak.vercel.app',
+    'https://aarakshak-frontend.vercel.app',
+    'https://aarakshak-git-main-kausiknelge.vercel.app',
+    'https://aarakshak-kausiknelge.vercel.app'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -19,16 +25,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
-// Debugging middleware
-app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
-  console.log('Headers:', req.headers);
-  if (req.body && Object.keys(req.body).length > 0) {
-    console.log('Body:', JSON.stringify(req.body, null, 2));
-  }
-  next();
-});
 
 // Handle preflight requests
 app.options('*', cors(corsOptions));
