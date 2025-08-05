@@ -41,7 +41,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       // Use test endpoint for immediate data access
-      const response = await axios.get('http://localhost:5000/api/security/test-dashboard');
+              const response = await axios.get('https://aarakshak-backend.onrender.com/api/security/test-dashboard');
       setSecurityData(response.data);
     } catch (error) {
       toast.error('Failed to fetch security data');

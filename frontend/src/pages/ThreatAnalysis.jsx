@@ -31,7 +31,7 @@ const ThreatAnalysis = () => {
   const fetchSecurityData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/security/dashboard');
+              const response = await axios.get('https://aarakshak-backend.onrender.com/api/security/dashboard');
       setSecurityData(response.data);
     } catch (error) {
       toast.error('Failed to fetch threat data');

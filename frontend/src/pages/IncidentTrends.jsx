@@ -17,7 +17,7 @@ const IncidentTrends = () => {
   const fetchIncidentData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/security/test-dashboard');
+              const response = await axios.get('https://aarakshak-backend.onrender.com/api/security/test-dashboard');
       setIncidentData(response.data);
     } catch (error) {
       console.error('Error fetching incident data:', error);

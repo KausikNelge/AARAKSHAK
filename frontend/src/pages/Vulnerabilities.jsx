@@ -16,7 +16,7 @@ const Vulnerabilities = () => {
   const fetchVulnerabilityData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/security/test-dashboard');
+              const response = await axios.get('https://aarakshak-backend.onrender.com/api/security/test-dashboard');
       setVulnerabilityData(response.data);
     } catch (error) {
       console.error('Error fetching vulnerability data:', error);

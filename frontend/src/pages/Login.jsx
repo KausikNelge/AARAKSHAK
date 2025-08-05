@@ -1,42 +1,32 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { Eye, EyeOff, Shield, Zap, Target } from 'lucide-react';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const cleanEmail = email.trim();
-    const cleanPassword = password.trim();
-
-    if (!cleanEmail || !cleanPassword) {
-      alert('Please fill in both input fields');
-      return;
-    }
+    setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: cleanEmail, password: cleanPassword }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Save JWT token (you can improve this, e.g. use context or Redux)
-        localStorage.setItem('token', data.token);
-        alert('Login successful!');
-        navigate('/dashboard'); // Redirect after login — adjust route as needed
+      const result = await login(email, password);
+      if (result.success) {
+        navigate('/dashboard');
       } else {
-        alert(data.error || 'Login failed');
+        alert(result.error || 'Login failed');
       }
-    } catch (err) {
-      console.error('Login error:', err);
+    } catch (error) {
+      console.error('Login error:', error);
       alert('Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,9 +57,10 @@ function Login() {
           </div>
           <button
             type="submit"
-            className="w-full bg-purple-600 hover:bg-purple-700 transition p-2 rounded font-semibold"
+            disabled={loading}
+            className="w-full bg-purple-600 hover:bg-purple-700 transition p-2 rounded font-semibold disabled:opacity-50"
           >
-            Sign In
+            {loading ? 'Authenticating...' : 'Sign In'}
           </button>
         </form>
         <p className="text-sm mt-4 text-center text-gray-400">
