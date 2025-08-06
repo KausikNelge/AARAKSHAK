@@ -81,6 +81,7 @@ async function main() {
     // Continue running even if MongoDB fails
   }
 }
+console.log('✅ Backend entry point reached');
 
 // Start MongoDB connection
 main();
@@ -124,4 +125,5 @@ try {
   process.exit(1);
 }
 
- 
+ console.log('✅ Server startup complete');
+
