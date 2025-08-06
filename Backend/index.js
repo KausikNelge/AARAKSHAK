@@ -65,17 +65,16 @@ async function main() {
     
     if (!process.env.MONGO_URI) {
       console.warn('⚠️ MONGO_URI not set - MongoDB connection will be skipped');
-      return; // Continue without MongoDB
+    } else {
+      console.log('🔄 Connecting to MongoDB...');
+      await mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+      });
+      console.log("✅ Connected to MongoDB successfully");
     }
-    
-    console.log('🔄 Connecting to MongoDB...');
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000, // 5 second timeout
-      socketTimeoutMS: 45000,
-    });
-    console.log("✅ Connected to MongoDB successfully");
   } catch (err) {
     console.error("❌ MongoDB connection error:", err.message);
     console.error("📋 Make sure MONGO_URI environment variable is set correctly");
