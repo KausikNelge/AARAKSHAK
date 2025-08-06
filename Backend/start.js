@@ -77,7 +77,18 @@ app.get('/', (req, res) => {
     message: 'Aarakshak Backend API is running',
     health: '/api/health',
     auth: '/api/auth',
-    security: '/api/security'
+    security: '/api/security',
+    timestamp: new Date().toISOString(),
+    port: process.env.PORT || 3000
+  });
+});
+
+// Simple test endpoint
+app.get('/test', (req, res) => {
+  res.status(200).json({
+    status: 'OK',
+    message: 'Test endpoint working',
+    timestamp: new Date().toISOString()
   });
 });
 
@@ -142,6 +153,17 @@ async function startServer() {
     // Handle server errors
     server.on('error', (error) => {
       console.error('❌ Server error:', error);
+      process.exit(1);
+    });
+
+    // Add Railway-specific error handling
+    process.on('uncaughtException', (error) => {
+      console.error('❌ Uncaught Exception:', error);
+      process.exit(1);
+    });
+
+    process.on('unhandledRejection', (reason, promise) => {
+      console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
       process.exit(1);
     });
 
