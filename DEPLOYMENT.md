@@ -69,7 +69,7 @@ In Render dashboard, go to **Environment** tab and add:
 ### 2.3 Deploy
 1. Click **Create Web Service**
 2. Wait for deployment to complete
-3. Note your service URL (e.g., `https://aarakshak-production.up.railway.app`)
+3. Note your service URL (e.g., `https://optimistic-smile-production.up.railway.app`)
 
 ---
 
@@ -118,7 +118,7 @@ const corsOptions = {
 ### 5.1 Test Backend
 Test your backend API:
 ```bash
-curl -X POST https://aarakshak-production.up.railway.app/api/auth/login \
+curl -X POST https://optimistic-smile-production.up.railway.app/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"kausik@example.com","password":"password123"}'
 ```

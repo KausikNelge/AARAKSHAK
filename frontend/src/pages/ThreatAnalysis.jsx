@@ -31,7 +31,7 @@ const ThreatAnalysis = () => {
   const fetchSecurityData = async () => {
     try {
       setLoading(true);
-              const response = await axios.get('https://aarakshak-production.up.railway.app/api/security/dashboard');
+              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/security/dashboard');
       setSecurityData(response.data);
     } catch (error) {
       toast.error('Failed to fetch threat data');

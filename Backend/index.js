@@ -16,7 +16,7 @@ const corsOptions = {
     'https://aarakshak-frontend.vercel.app',
     'https://aarakshak-git-main-kausiknelge.vercel.app',
     'https://aarakshak-kausiknelge.vercel.app',
-    'https://aarakshak-production.up.railway.app'
+    'https://optimistic-smile-production.up.railway.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

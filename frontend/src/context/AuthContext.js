@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('https://aarakshak-production.up.railway.app/api/auth/login', {
+      const response = await axios.post('https://optimistic-smile-production.up.railway.app/api/auth/login', {
         email,
         password
       });
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password) => {
     try {
-      const response = await axios.post('https://aarakshak-production.up.railway.app/api/auth/register', {
+      const response = await axios.post('https://optimistic-smile-production.up.railway.app/api/auth/register', {
         username,
         email,
         password

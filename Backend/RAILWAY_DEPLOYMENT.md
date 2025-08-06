@@ -1,7 +1,7 @@
 # Railway Deployment Guide for Aarakshak Backend
 
 ## Overview
-This guide explains how to deploy the Aarakshak backend to Railway using the domain: `https://aarakshak-production.up.railway.app`
+This guide explains how to deploy the Aarakshak backend to Railway using the domain: `https://optimistic-smile-production.up.railway.app`
 
 ## Prerequisites
 1. Railway account
@@ -27,9 +27,9 @@ PORT=3000
 ```
 
 ### 3. Domain Configuration
-- Railway will automatically assign the domain: `aarakshak-production.up.railway.app`
+- Railway will automatically assign the domain: `optimistic-smile-production.up.railway.app`
 - The backend is configured to accept requests from this domain
-- Health check endpoint: `https://aarakshak-production.up.railway.app/api/health`
+- Health check endpoint: `https://optimistic-smile-production.up.railway.app/api/health`
 
 ### 4. Deployment Process
 1. Push your code to the main branch
@@ -39,7 +39,7 @@ PORT=3000
 
 ### 5. Frontend Configuration
 The frontend has been updated to use the Railway domain:
-- All API calls now point to `https://aarakshak-production.up.railway.app`
+- All API calls now point to `https://optimistic-smile-production.up.railway.app`
 - CORS is configured to allow requests from Vercel domains
 
 ### 6. Configuration Files
@@ -65,7 +65,7 @@ Test the following endpoints:
 - Auto-restart on failure is enabled
 
 ## Migration from Render
-- All frontend URLs updated from `aarakshak-backend.onrender.com` to `aarakshak-production.up.railway.app`
+- All frontend URLs updated from `aarakshak-backend.onrender.com` to `optimistic-smile-production.up.railway.app`
 - CORS configuration includes Railway domain
 - No code changes required beyond URL updates
 

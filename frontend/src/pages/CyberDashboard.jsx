@@ -55,7 +55,7 @@ const CyberDashboard = () => {
   const fetchSecurityData = async () => {
     try {
       setLoading(true);
-              const response = await axios.get('https://aarakshak-production.up.railway.app/api/security/test-dashboard');
+              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/security/test-dashboard');
       setSecurityData(response.data);
     } catch (error) {
       toast.error('Failed to fetch security data');
@@ -67,7 +67,7 @@ const CyberDashboard = () => {
 
   const fetchMockBreachData = async () => {
     try {
-              const response = await axios.get('https://aarakshak-production.up.railway.app/api/breach-check/test@example.com');
+              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/breach-check/test@example.com');
       setBreachData(response.data);
     } catch (error) {
       console.error('Error fetching breach data:', error);
@@ -87,7 +87,7 @@ const CyberDashboard = () => {
 
   const fetchMockVirusTotalData = async () => {
     try {
-              const response = await axios.get('https://aarakshak-production.up.railway.app/api/virus-total/https://example.com');
+              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/virus-total/https://example.com');
       setVirusTotalData(response.data);
     } catch (error) {
       console.error('Error fetching VirusTotal data:', error);
@@ -112,7 +112,7 @@ const CyberDashboard = () => {
 
   const fetchMockCloudSecurityData = async () => {
     try {
-              const response = await axios.get('https://aarakshak-production.up.railway.app/api/cloud-security');
+              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/cloud-security');
       setCloudSecurityData(response.data);
     } catch (error) {
       console.error('Error fetching cloud security data:', error);
@@ -148,7 +148,7 @@ const CyberDashboard = () => {
     
     toast.loading('Checking for breaches...');
     try {
-              const response = await axios.get(`https://aarakshak-production.up.railway.app/api/breach-check/${encodeURIComponent(emailToCheck)}`);
+              const response = await axios.get(`https://optimistic-smile-production.up.railway.app/api/breach-check/${encodeURIComponent(emailToCheck)}`);
       setBreachData(response.data);
       toast.dismiss();
       toast.success('Breach check completed');
@@ -167,7 +167,7 @@ const CyberDashboard = () => {
     
     toast.loading('Scanning URL...');
     try {
-              const response = await axios.get(`https://aarakshak-production.up.railway.app/api/virus-total/${encodeURIComponent(urlToScan)}`);
+              const response = await axios.get(`https://optimistic-smile-production.up.railway.app/api/virus-total/${encodeURIComponent(urlToScan)}`);
       setVirusTotalData(response.data);
       toast.dismiss();
       toast.success('URL scan completed');

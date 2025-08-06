@@ -2,7 +2,7 @@
 
 ## Migration Completed ✅
 
-The Aarakshak backend has been successfully configured for Railway deployment with the domain: `https://aarakshak-production.up.railway.app`
+The Aarakshak backend has been successfully configured for Railway deployment with the domain: `https://optimistic-smile-production.up.railway.app`
 
 ## Changes Made
 
@@ -24,7 +24,7 @@ The Aarakshak backend has been successfully configured for Railway deployment wi
    - Added Railway deployment script
 
 ### Frontend Changes
-All API endpoints updated from `aarakshak-backend.onrender.com` to `aarakshak-production.up.railway.app`:
+All API endpoints updated from `aarakshak-backend.onrender.com` to `optimistic-smile-production.up.railway.app`:
 
 - **Authentication** (`frontend/src/context/AuthContext.js`)
   - Login endpoint
@@ -56,7 +56,7 @@ All API endpoints updated from `aarakshak-backend.onrender.com` to `aarakshak-pr
    - Deploy from main branch
 
 2. **Verify Deployment**
-   - Test health endpoint: `https://aarakshak-production.up.railway.app/api/health`
+   - Test health endpoint: `https://optimistic-smile-production.up.railway.app/api/health`
    - Test authentication endpoints
    - Verify frontend connectivity
 
@@ -92,7 +92,7 @@ All API endpoints updated from `aarakshak-backend.onrender.com` to `aarakshak-pr
 
 ## Configuration Summary
 
-✅ Railway domain configured: `aarakshak-production.up.railway.app`
+✅ Railway domain configured: `optimistic-smile-production.up.railway.app`
 ✅ CORS settings updated
 ✅ All frontend API calls updated
 ✅ Health check endpoint added
