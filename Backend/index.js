@@ -59,48 +59,70 @@ app.get('/', (req, res) => {
 
 async function main() {
   try {
+    console.log('🔄 Starting Aarakshak Backend...');
+    console.log('📋 Environment:', process.env.NODE_ENV || 'development');
+    console.log('🔗 Port:', process.env.PORT || 3000);
+    
     if (!process.env.MONGO_URI) {
-      throw new Error('MONGO_URI environment variable is not set');
+      console.warn('⚠️ MONGO_URI not set - MongoDB connection will be skipped');
+      return; // Continue without MongoDB
     }
     
     console.log('🔄 Connecting to MongoDB...');
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000, // 5 second timeout
+      socketTimeoutMS: 45000,
     });
     console.log("✅ Connected to MongoDB successfully");
   } catch (err) {
     console.error("❌ MongoDB connection error:", err.message);
     console.error("📋 Make sure MONGO_URI environment variable is set correctly");
-    // Continue running even if MongoDB fails initially
+    // Continue running even if MongoDB fails
   }
 }
 
 // Start MongoDB connection
 main();
 
-// Start the server
+// Start the server with better error handling
 const PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
-});
 
-// Handle server errors
-server.on('error', (error) => {
-  console.error('❌ Server error:', error);
-  process.exit(1);
-});
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('🛑 SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    console.log('✅ Server closed');
-    process.exit(0);
+try {
+  const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
+    console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
   });
-});
+
+  // Handle server errors
+  server.on('error', (error) => {
+    console.error('❌ Server error:', error);
+    process.exit(1);
+  });
+
+  // Graceful shutdown
+  process.on('SIGTERM', () => {
+    console.log('🛑 SIGTERM received, shutting down gracefully');
+    server.close(() => {
+      console.log('✅ Server closed');
+      process.exit(0);
+    });
+  });
+
+  process.on('SIGINT', () => {
+    console.log('🛑 SIGINT received, shutting down gracefully');
+    server.close(() => {
+      console.log('✅ Server closed');
+      process.exit(0);
+    });
+  });
+
+} catch (error) {
+  console.error('❌ Failed to start server:', error);
+  process.exit(1);
+}
 
  

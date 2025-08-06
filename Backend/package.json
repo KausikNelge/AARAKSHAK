@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "test-startup": "node test-startup.js",
     "seed": "node seedData.js",
     "update-user": "node updateUserData.js",
     "create-prod-user": "node createProductionUser.js",
