@@ -1,0 +1,1 @@
+require('http').createServer((req, res) => { res.writeHead(200, {'Content-Type': 'application/json'}); res.end(JSON.stringify({message: 'One Line Server Working', timestamp: new Date().toISOString(), port: process.env.PORT || 3000})) }).listen(process.env.PORT || 3000, '0.0.0.0', () => console.log('✅ One line server running on port', process.env.PORT || 3000)) 
