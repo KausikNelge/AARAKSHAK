@@ -8,7 +8,8 @@
     "dev": "nodemon index.js",
     "seed": "node seedData.js",
     "update-user": "node updateUserData.js",
-    "create-prod-user": "node createProductionUser.js"
+    "create-prod-user": "node createProductionUser.js",
+    "railway:deploy": "echo 'Railway deployment configured. Push to main branch to deploy.'"
   },
   "dependencies": {
     "express": "^4.18.2",

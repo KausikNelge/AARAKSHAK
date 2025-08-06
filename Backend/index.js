@@ -8,14 +8,15 @@ const apiRoutes = require('./routes/api');
 const { log } = require('console');
 const app = express();
 
-// Production CORS configuration
+// Production CORS configuration for Railway
 const corsOptions = {
   origin: [
     'http://localhost:3000',
     'https://aarakshak.vercel.app',
     'https://aarakshak-frontend.vercel.app',
     'https://aarakshak-git-main-kausiknelge.vercel.app',
-    'https://aarakshak-kausiknelge.vercel.app'
+    'https://aarakshak-kausiknelge.vercel.app',
+    'https://aarakshak-production.up.railway.app'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -32,6 +33,17 @@ app.options('*', cors(corsOptions));
 app.use('/api/auth', authRoutes);
 app.use('/api/security', securityRoutes);
 app.use('/api', apiRoutes);
+
+// Health check endpoint for Railway
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    service: 'Aarakshak Backend',
+    platform: 'Railway'
+  });
+});
+
 async function main() {
   try {
     await mongoose.connect(process.env.MONGO_URI, {
