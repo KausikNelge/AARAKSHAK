@@ -4,10 +4,11 @@
   "description": "Backend for Aarakshak Security Assessment Platform",
   "main": "index.js",
   "scripts": {
-    "start": "node start.js",
-    "dev": "nodemon start.js",
+    "start": "node railway-server.js",
+    "dev": "nodemon railway-server.js",
     "test-startup": "node test-startup.js",
     "simple": "node simple-server.js",
+    "bulletproof": "node railway-server.js",
     "seed": "node seedData.js",
     "update-user": "node updateUserData.js",
     "create-prod-user": "node createProductionUser.js",

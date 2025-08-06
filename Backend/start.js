@@ -142,13 +142,13 @@ async function startServer() {
     
     // Start the server
     const PORT = process.env.PORT || 3000;
-    const server = app.listen(PORT, '0.0.0.0', () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-      console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-      console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
-      console.log('✅ Railway deployment successful!');
-    });
+         const server = app.listen(PORT, '0.0.0.0', () => {
+       console.log(`🚀 Server running on port ${PORT}`);
+       console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+       console.log(`🔗 Health check: https://optimistic-smile-production.up.railway.app/api/health`);
+       console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
+       console.log('✅ Railway deployment successful!');
+     });
 
     // Handle server errors
     server.on('error', (error) => {

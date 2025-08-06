@@ -46,12 +46,12 @@ const server = http.createServer((req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, '0.0.0.0', () => {
-  console.log(`✅ Minimal server running on port ${PORT}`);
-  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`🔗 Test URL: http://localhost:${PORT}/`);
-  console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
-});
+ server.listen(PORT, '0.0.0.0', () => {
+   console.log(`✅ Minimal server running on port ${PORT}`);
+   console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+   console.log(`🔗 Test URL: https://optimistic-smile-production.up.railway.app/`);
+   console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
+ });
 
 server.on('error', (error) => {
   console.error('❌ Server error:', error);
