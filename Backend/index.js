@@ -40,24 +40,67 @@ app.get('/api/health', (req, res) => {
     status: 'OK', 
     timestamp: new Date().toISOString(),
     service: 'Aarakshak Backend',
-    platform: 'Railway'
+    platform: 'Railway',
+    port: process.env.PORT || 3000,
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Simple root endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Aarakshak Backend API is running',
+    health: '/api/health',
+    auth: '/api/auth',
+    security: '/api/security'
   });
 });
 
 async function main() {
   try {
+    if (!process.env.MONGO_URI) {
+      throw new Error('MONGO_URI environment variable is not set');
+    }
+    
+    console.log('🔄 Connecting to MongoDB...');
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-    console.log("✅ Connected to MongoDB");
+    console.log("✅ Connected to MongoDB successfully");
   } catch (err) {
-    console.error("❌ MongoDB connection error:", err);
+    console.error("❌ MongoDB connection error:", err.message);
+    console.error("📋 Make sure MONGO_URI environment variable is set correctly");
+    // Continue running even if MongoDB fails initially
   }
 }
 
+// Start MongoDB connection
 main();
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
+  console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
+});
+
+// Handle server errors
+server.on('error', (error) => {
+  console.error('❌ Server error:', error);
+  process.exit(1);
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('🛑 SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('✅ Server closed');
+    process.exit(0);
+  });
+});
 
  
