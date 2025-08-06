@@ -12,13 +12,21 @@ const server = http.createServer((req, res) => {
     'Access-Control-Allow-Origin': '*'
   });
   
-  res.end(JSON.stringify({
-    message: 'Railway Final Server Working',
-    timestamp: new Date().toISOString(),
-    port: port,
-    url: req.url,
-    method: req.method
-  }));
+  if (req.url === '/health') {
+    res.end(JSON.stringify({
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      service: 'Railway Final Server'
+    }));
+  } else {
+    res.end(JSON.stringify({
+      message: 'Railway Final Server Working',
+      timestamp: new Date().toISOString(),
+      port: port,
+      url: req.url,
+      method: req.method
+    }));
+  }
 });
 
 server.listen(port, '0.0.0.0', () => {
