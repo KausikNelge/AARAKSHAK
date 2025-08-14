@@ -1,0 +1,19 @@
+{
+  "name": "aarakshak-backend",
+  "rootDirectory": "Backend",
+  "startCommand": "npm start",
+  "buildCommand": "npm install",
+  "env": {
+    "MONGO_URI": "mongodb+srv://kausiknelge:2nzBylEiTNgqkGtF@cluster0.o4f2iun.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "JWT_SECRET": "d71dfb53b9d0497f21b0283926383fa9dd6e6957f9958d3bee1880d72eb69649ERE",
+    "NODE_ENV": "production"
+  },
+  "healthCheckPath": "/api/health",
+  "platform": "nodejs",
+  "ports": {
+    "web": {
+      "port": "process.env.PORT",
+      "protocol": "http"
+    }
+  }
+}

@@ -57,6 +57,11 @@ app.get('/', (req, res) => {
   });
 });
 
+// Temporary ping route to check if server is alive
+app.get('/ping', (req, res) => {
+  res.send('pong');
+});
+
 async function main() {
   try {
     console.log('🔄 Starting Aarakshak Backend...');
