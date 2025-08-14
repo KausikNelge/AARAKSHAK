@@ -232,4 +232,4 @@ For support and questions, please open an issue in the repository.
 
 ---
 
-**AARAKSHAK** - Advanced Cybersecurity Platform with Cyberpunk Aesthetic
+**AARAKSHAK** - Advanced Cybersecurity Platform 
