@@ -10,7 +10,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - MONGO_URI=${MONGO_URI}  # Will use your Atlas MongoDB URI
+      - MONGO_URI=mongodb+srv://kausiknelge:2nzBylEiTNgqkGtF@cluster0.o4f2iun.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     volumes:
       - ./Backend:/app
       - /app/node_modules
@@ -22,6 +22,20 @@ services:
       retries: 3
       start_period: 40s
 
+  # Ngrok tunnel service to expose local backend to internet
+  ngrok:
+    image: ngrok/ngrok:latest
+    ports:
+      - "4040:4040"  # Ngrok web interface
+    environment:
+      - NGROK_AUTHTOKEN=31KnyAqV8wNrCnVeFvct7GbpIPz_44wApSKoxPCxVvgb7PtBt
+    command: http backend:3000 --log=stdout
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - aarakshak-network
+
 networks:
-  default:
-    name: aarakshak-network 
+  aarakshak-network:
+    driver: bridge 

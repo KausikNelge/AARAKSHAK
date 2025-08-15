@@ -135,7 +135,7 @@ try {
     console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
     
     if (process.env.NODE_ENV === 'production') {
-      console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
+    console.log(`🌐 Railway domain: https://optimistic-smile-production.up.railway.app`);
     } else {
       console.log(`🌐 Local Docker: http://localhost:3001`);
     }

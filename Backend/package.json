@@ -4,8 +4,8 @@
   "description": "Backend for Aarakshak Security Assessment Platform",
   "main": "index.js",
   "scripts": {
-    "start": "node railway-final.js",
-    "dev": "nodemon railway-final.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test-startup": "node test-startup.js",
     "simple": "node simple-server.js",
     "bulletproof": "node railway-server.js",

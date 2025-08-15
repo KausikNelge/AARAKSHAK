@@ -1,8 +1,8 @@
 // API Configuration for different environments
 const API_CONFIG = {
-  // Development - Local Docker Backend
+  // Development - Local Docker Backend (via ngrok for Vercel)
   development: {
-    baseURL: 'http://localhost:3001',
+    baseURL: 'http://localhost:3001', // Will be updated to ngrok URL for Vercel
     timeout: 10000,
   },
   // Production - Railway Backend
@@ -24,6 +24,16 @@ const getEnvironment = () => {
     return 'development';
   }
   
+  // Check if we're on Vercel but want to connect to local backend
+  // This allows Vercel frontend to connect to local Docker backend via ngrok
+  if (window.location.hostname.includes('vercel.app')) {
+    // Check if we have a custom ngrok URL configured
+    const ngrokUrl = localStorage.getItem('ngrok_url');
+    if (ngrokUrl) {
+      return 'development'; // Use development config but with ngrok URL
+    }
+  }
+  
   // Default to production
   return 'production';
 };
@@ -31,7 +41,20 @@ const getEnvironment = () => {
 // Get current API configuration
 const getApiConfig = () => {
   const env = getEnvironment();
-  return API_CONFIG[env] || API_CONFIG.production;
+  const config = API_CONFIG[env] || API_CONFIG.production;
+  
+  // If we're on Vercel and have an ngrok URL, use it
+  if (env === 'development' && window.location.hostname.includes('vercel.app')) {
+    const ngrokUrl = localStorage.getItem('ngrok_url');
+    if (ngrokUrl) {
+      return {
+        ...config,
+        baseURL: ngrokUrl
+      };
+    }
+  }
+  
+  return config;
 };
 
 // Create axios instance with current configuration
@@ -77,6 +100,23 @@ const createApiInstance = () => {
   );
   
   return instance;
+};
+
+// Function to set ngrok URL for Vercel frontend
+export const setNgrokUrl = (url) => {
+  localStorage.setItem('ngrok_url', url);
+  console.log('✅ Ngrok URL set for Vercel frontend:', url);
+};
+
+// Function to get current ngrok URL
+export const getNgrokUrl = () => {
+  return localStorage.getItem('ngrok_url');
+};
+
+// Function to clear ngrok URL
+export const clearNgrokUrl = () => {
+  localStorage.removeItem('ngrok_url');
+  console.log('✅ Ngrok URL cleared');
 };
 
 export { getApiConfig, createApiInstance, getEnvironment };
