@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import createApiInstance from '../config/api';
 
 const AuthContext = createContext();
 
@@ -16,17 +16,20 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [loading, setLoading] = useState(true);
 
+  // Create API instance
+  const api = createApiInstance();
+
   useEffect(() => {
     if (token) {
       // Set default authorization header
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
     setLoading(false);
-  }, [token]);
+  }, [token, api]);
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('https://optimistic-smile-production.up.railway.app/api/auth/login', {
+      const response = await api.post('/api/auth/login', {
         email,
         password
       });
@@ -34,7 +37,7 @@ export const AuthProvider = ({ children }) => {
       const { token: newToken } = response.data;
       setToken(newToken);
       localStorage.setItem('token', newToken);
-      axios.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
       
       return { success: true };
     } catch (error) {
@@ -47,7 +50,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password) => {
     try {
-      const response = await axios.post('https://optimistic-smile-production.up.railway.app/api/auth/register', {
+      const response = await api.post('/api/auth/register', {
         username,
         email,
         password
@@ -66,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setUser(null);
     localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization'];
+    delete api.defaults.headers.common['Authorization'];
   };
 
   const value = {

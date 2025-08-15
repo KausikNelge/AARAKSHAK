@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import createApiInstance from '../config/api';
 import { 
   BarChart, 
   Bar, 
@@ -37,6 +37,7 @@ import StatCard from '../components/StatCard';
 import toast from 'react-hot-toast';
 
 const CyberDashboard = () => {
+  const api = createApiInstance();
   const [securityData, setSecurityData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [breachData, setBreachData] = useState(null);
@@ -55,7 +56,7 @@ const CyberDashboard = () => {
   const fetchSecurityData = async () => {
     try {
       setLoading(true);
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/security/test-dashboard');
+              const response = await api.get('/api/security/test-dashboard');
       setSecurityData(response.data);
     } catch (error) {
       toast.error('Failed to fetch security data');
@@ -67,7 +68,7 @@ const CyberDashboard = () => {
 
   const fetchMockBreachData = async () => {
     try {
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/breach-check/test@example.com');
+              const response = await api.get('/api/breach-check/test@example.com');
       setBreachData(response.data);
     } catch (error) {
       console.error('Error fetching breach data:', error);
@@ -87,7 +88,7 @@ const CyberDashboard = () => {
 
   const fetchMockVirusTotalData = async () => {
     try {
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/virus-total/https://example.com');
+              const response = await api.get('/api/virus-total/https://example.com');
       setVirusTotalData(response.data);
     } catch (error) {
       console.error('Error fetching VirusTotal data:', error);
@@ -112,7 +113,7 @@ const CyberDashboard = () => {
 
   const fetchMockCloudSecurityData = async () => {
     try {
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/cloud-security');
+              const response = await api.get('/api/cloud-security');
       setCloudSecurityData(response.data);
     } catch (error) {
       console.error('Error fetching cloud security data:', error);

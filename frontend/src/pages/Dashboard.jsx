@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import createApiInstance from '../config/api';
 import { 
   BarChart, 
   Bar, 
@@ -32,6 +32,7 @@ import toast from 'react-hot-toast';
 const Dashboard = () => {
   const [securityData, setSecurityData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const api = createApiInstance();
 
   useEffect(() => {
     fetchSecurityData();
@@ -41,7 +42,7 @@ const Dashboard = () => {
     try {
       setLoading(true);
       // Use test endpoint for immediate data access
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/security/test-dashboard');
+      const response = await api.get('/api/security/test-dashboard');
       setSecurityData(response.data);
     } catch (error) {
       toast.error('Failed to fetch security data');

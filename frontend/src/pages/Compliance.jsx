@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { Shield, CheckCircle, AlertTriangle, FileText, Award, Target, TrendingUp, Activity, Zap, Lock } from 'lucide-react';
-import axios from 'axios';
+import createApiInstance from '../config/api';
 import toast from 'react-hot-toast';
 
 const Compliance = () => {
+  const api = createApiInstance();
   const [complianceData, setComplianceData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedFramework, setSelectedFramework] = useState('overall');
@@ -16,7 +17,7 @@ const Compliance = () => {
   const fetchComplianceData = async () => {
     try {
       setLoading(true);
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/security/test-dashboard');
+              const response = await api.get('/api/security/test-dashboard');
       setComplianceData(response.data);
     } catch (error) {
       console.error('Error fetching compliance data:', error);

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
 import { AlertTriangle, Shield, Activity, Zap, Target, TrendingUp, AlertCircle, CheckCircle, Clock, XCircle } from 'lucide-react';
-import axios from 'axios';
+import createApiInstance from '../config/api';
 import toast from 'react-hot-toast';
 
 const Vulnerabilities = () => {
+  const api = createApiInstance();
   const [vulnerabilityData, setVulnerabilityData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedVulnerability, setSelectedVulnerability] = useState(null);
@@ -16,7 +17,7 @@ const Vulnerabilities = () => {
   const fetchVulnerabilityData = async () => {
     try {
       setLoading(true);
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/security/test-dashboard');
+              const response = await api.get('/api/security/test-dashboard');
       setVulnerabilityData(response.data);
     } catch (error) {
       console.error('Error fetching vulnerability data:', error);

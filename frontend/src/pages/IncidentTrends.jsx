@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, BarChart, Bar } from 'recharts';
 import { TrendingUp, AlertTriangle, Clock, MapPin, Activity, Calendar, Users, Shield, Zap, Target } from 'lucide-react';
-import axios from 'axios';
+import createApiInstance from '../config/api';
 import toast from 'react-hot-toast';
 
 const IncidentTrends = () => {
+  const api = createApiInstance();
   const [incidentData, setIncidentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedIncident, setSelectedIncident] = useState(null);
@@ -17,7 +18,7 @@ const IncidentTrends = () => {
   const fetchIncidentData = async () => {
     try {
       setLoading(true);
-              const response = await axios.get('https://optimistic-smile-production.up.railway.app/api/security/test-dashboard');
+              const response = await api.get('/api/security/test-dashboard');
       setIncidentData(response.data);
     } catch (error) {
       console.error('Error fetching incident data:', error);
