@@ -149,7 +149,7 @@ const CyberDashboard = () => {
     
     toast.loading('Checking for breaches...');
     try {
-              const response = await axios.get(`https://optimistic-smile-production.up.railway.app/api/breach-check/${encodeURIComponent(emailToCheck)}`);
+      const response = await api.get(`/api/breach-check/${encodeURIComponent(emailToCheck)}`);
       setBreachData(response.data);
       toast.dismiss();
       toast.success('Breach check completed');
@@ -168,7 +168,7 @@ const CyberDashboard = () => {
     
     toast.loading('Scanning URL...');
     try {
-              const response = await axios.get(`https://optimistic-smile-production.up.railway.app/api/virus-total/${encodeURIComponent(urlToScan)}`);
+      const response = await api.get(`/api/virus-total/${encodeURIComponent(urlToScan)}`);
       setVirusTotalData(response.data);
       toast.dismiss();
       toast.success('URL scan completed');
